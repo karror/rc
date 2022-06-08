@@ -1,0 +1,146 @@
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    border_width = 1,
+    color0 = 'e0e0e0',
+    color1 = '808080',
+    color2 = 'e08080',
+    cpu_avg_samples = 8,
+    default_bar_height = 4,
+    default_bar_width = 0,
+    default_gauge_height = 25,
+    default_gauge_width = 40,
+    default_graph_height = 25,
+    default_graph_width = 0,
+    default_color = '303030',
+    default_outline_color = 'a0a0a0',
+    default_shade_color = 'a0a0a0',
+    diskio_avg_samples = 2,
+    double_buffer = true,
+    draw_borders = false,
+    draw_graph_borders = true,
+    draw_outline = false,
+    draw_shades = false,
+    font = 'mononoki Nerd Font Mono Regular:size=8',
+    format_human_readable = true,
+    gap_x = 30,
+    gap_y = 80,
+    minimum_height = 100,
+    minimum_width = 100,
+    maximum_width = 350,
+    maximum_height = 700,
+    net_avg_samples = 8,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = false,
+    own_window = true,
+    own_window_transparent = true,
+    own_window_class = 'conky',
+    own_window_colour = 'black',#'404040',
+    own_window_hints = 'undecorated','below','skip_taskbar','skip_pager',
+    own_window_type = 'dock',
+    own_window_argb_visual = true,
+    own_window_argb_value = 100,
+    short_units = true,
+    show_graph_range = false,
+    show_graph_scale = false,
+    stippled_borders = 0,
+    temperature_unit = 'celsius',
+    times_in_seconds = true,
+    top_cpu_separate = false,
+    top_name_verbose = true,
+    top_name_width = 18,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'none',
+    use_xft = true,
+    template0=[[${color1}${goto 30}${cpu cpu\1}%${goto 60}${freq \1}MHz]],
+    template1=[[${color1}${cpubar cpu\1 3,350 303030 467f77}]]
+};
+
+conky.text = [[
+${color0}${goto 5}Distro:${goto 100}${color1}Debian 11 (buster)
+${color0}${goto 5}Kernel:${goto 100}${color1}$kernel
+${color0}${goto 5}Hostname:${goto 100}${color1}$nodename
+${color0}${goto 5}Uptime:${goto 100}${color1}$uptime
+
+# cpu
+${font mononoki Nerd Font Mono Regular:size=10}${color2}AMD FX-6350 6-Core 4.20GHz${font mononoki Nerd Font Mono Regular:size=8}
+${color0}all:${color1}${goto 70}${cpu cpu0}%${goto 100}${freq 0}MHz${goto 200}${hwmon 0 temp 1}°C${goto 240}${hwmon 1 temp 1}°C${goto 280}${hwmon 1 temp 2}°C${goto 320}${hwmon 2 temp 1}°C
+${color1}${cpugraph cpu0 20,350 303030 467f77}
+${color1}${cpubar cpu0 3,350 303030 467f77}
+${template0 1}
+${template1 1}
+${template0 2}
+${template1 2}
+${template0 3}
+${template1 3}
+${template0 4}
+${template1 4}
+${template0 5}
+${template1 5}
+${template0 6}
+${template1 6}
+
+# memory
+${font mononoki Nerd Font Mono Regular:size=10}${color2}Memory${font mononoki Nerd Font Mono Regular:size=8}
+${color0}mem:${color1} ${memperc}% $mem/$memmax
+${memgraph 20,350 303030 467f77}
+${membar 3,350}
+${color0}buffer:${color1} $buffers${goto 170}${color0}cached :${color1} $cached
+${memwithbuffersbar 3,350}
+# gpu
+#${font mononoki Nerd Font Mono Regular:size=10}${color2}${nvidia modelname}
+#${font mononoki Nerd Font Mono Regular:size=8}${color0}gpu:${color1}${goto 55}${nvidia gpuutil}%${goto 85}${nvidia gpufreqcur}MHz${goto 145}${nvidia gpufreqmin}MHz-${nvidia gpufreqmax}MHz ${nvidia gputemp}c ${nvidia fanspeed}rpm
+#${nvidiagraph gpufreqcur 40,350 303030 467f77 0}
+#${nvidiabar 10,350 gpufreqcur}
+#${color0}mem:${color1}${goto 55}${nvidia memutil}%${goto 145}${nvidia memused}M-${nvidia memmax}M
+#${nvidiagraph memused 20,350 303030 467f77 0}
+#${nvidiabar 10,350 memused}
+#${color0}freq:${color1}${goto 55}${nvidia memfreqcur}MHz${goto 145}${nvidia memfreqmin}MHz-${nvidia memfreqmax}MHz
+#${nvidiagraph memfreqcur 40,350 303030 467f77 0}
+#${nvidiabar 10,350 memfreqcur}
+#${color0}bandwidth:${color1} ${nvidia membwutil}%
+#${nvidiabar 10,350 membwutil}
+#${color0}mtr:${color1}${goto 55}${nvidia mtrfreqcur}MHz${goto 145}${nvidia mtrfreqmin}MHz-${nvidia mtrfreqmax}MHz
+#${color0}video:${color1} ${nvidia videoutil}%${goto 170}${color0}pcie: ${color1}${nvidia pcieutil}%
+
+# network
+${font mononoki Nerd Font Mono Regular:size=10}${color2}Network${font mononoki Nerd Font Mono Regular:size=8}${color0}${goto 100}ipv4${goto 225}down${goto 285}up${font mononoki Nerd Font Mono Regular:size=8}
+${color0}enp2s0${color1}${goto 100}${addr enp2s0}${goto 225}${downspeed enp2s0}${goto 285}${upspeed enp2s0}
+${downspeedgraph enp2s0 20,170 303030 467f77}${goto 180}${upspeedgraph enp2s0 20,170 303030 467f77}
+${color0}lo${color1}${goto 100}${addr lo}${goto 225}${downspeed lo}${goto 285}${upspeed lo}
+${downspeedgraph lo 20,170 303030 467f77}${goto 180}${upspeedgraph lo 20,170 303030 467f77}
+
+# disk
+${font mononoki Nerd Font Mono Regular:size=10}${color2}Disk${font mononoki Nerd Font Mono Regular:size=8}${color0}${goto 100}dev${goto 160}read${goto 210}write${goto 260}space
+${color0}Debian 11${goto 100}${color1}nvme1n1${goto 160}${diskio_read /dev/nvme1n1}${goto 210}${diskio_write /dev/nvme1n1}${goto 260}${fs_used /}/${fs_size /}
+${fs_bar /}
+${diskiograph_read /dev/nvme1n1 20,170 303030 467f77}${goto 185}${diskiograph_write /dev/nvme1n1 20,170 303030 467f77}${if_mounted /media/lolus/Magazyn}
+${color0}Magazyn${goto 100}${color1}sdc1${goto 160}${diskio_read /dev/sdc1}${goto 210}${diskio_write /dev/sdc1}${goto 260}${fs_used /media/lolus/Magazyn}/${fs_size /media/lolus/Magazyn}
+${fs_bar /media/lolus/Magazyn} ${endif}${if_mounted /media/lolus/System}
+${color0}Windows${goto 100}${color1}sda2${goto 160}${diskio_read /dev/sda2}${goto 210}${diskio_write /dev/sda2}${goto 260}${fs_used /media/lolus/System}/${fs_size /media/lolus/System}
+${fs_bar /media/lolus/System} ${endif}${if_mounted /media/lolus/2d136e3f-19b4-4e40-9032-5ca0883feee4}
+${color0}Nowy m.2${goto 100}${color1}nvme0n1${goto 160}${diskio_read /dev/nvme0n1}${goto 210}${diskio_write /dev/nvme0n1}${goto 260}${fs_used /media/lolus/2d136e3f-19b4-4e40-9032-5ca0883feee4}/${fs_size /media/lolus/2d136e3f-19b4-4e40-9032-5ca0883feee4}
+${fs_bar /media/lolus/2d136e3f-19b4-4e40-9032-5ca0883feee4} ${endif}${if_mounted /media/lolus/d9455ac7-884b-426a-8607-929a87821fc9}
+${color0}Stary SSD${goto 100}${color1}sdb6${goto 160}${diskio_read /dev/sdb6}${goto 210}${diskio_write /dev/sdb6}${goto 260}${fs_used /media/lolus/d9455ac7-884b-426a-8607-929a87821fc9}/${fs_size /media/lolus/d9455ac7-884b-426a-8607-929a87821fc9}
+${fs_bar /media/lolus/d9455ac7-884b-426a-8607-929a87821fc9} ${endif}
+
+# top
+${font mononoki Nerd Font Mono Regular:size=10}${color2}Top Cpu${font mononoki Nerd Font Mono Regular:size=8}${color0}${goto 170}pid${goto 220}cpu%${goto 285}mem${color1}
+${color0}${top name 1}${color1}${goto 170}${top pid 1}${goto 220}${top cpu 1}${goto 285}${top mem_res 1}
+${color0}${top name 2}${color1}${goto 170}${top pid 2}${goto 220}${top cpu 2}${goto 285}${top mem_res 2}
+${color0}${top name 3}${color1}${goto 170}${top pid 3}${goto 220}${top cpu 3}${goto 285}${top mem_res 3}
+${color0}${top name 4}${color1}${goto 170}${top pid 4}${goto 220}${top cpu 4}${goto 285}${top mem_res 4}${font mononoki Nerd Font Mono Regular:size=10}
+${color2}Top Mem${font mononoki Nerd Font Mono Regular:size=8}${color0}${goto 170}pid${goto 220}cpu%${goto 285}mem${color1}
+${color0}${top_mem name 1}${color1}${goto 170}${top_mem pid 1}${goto 220}${top_mem cpu 1}${goto 285}${top_mem mem_res 1}
+${color0}${top_mem name 2}${color1}${goto 170}${top_mem pid 2}${goto 220}${top_mem cpu 2}${goto 285}${top_mem mem_res 2}
+${color0}${top_mem name 3}${color1}${goto 170}${top_mem pid 3}${goto 220}${top_mem cpu 3}${goto 285}${top_mem mem_res 3}
+${color0}${top_mem name 4}${color1}${goto 170}${top_mem pid 4}${goto 220}${top_mem cpu 4}${goto 285}${top_mem mem_res 4}${font mononoki Nerd Font Mono Regular:size=10}
+${color2}Top IO${font mononoki Nerd Font Mono Regular:size=8}${color0}${goto 170}pid${goto 225}read${goto 285}write${color1}
+${color0}${top_io name 1}${color1}${goto 170}${top_io pid 1}${goto 225}${top_io io_read 1}${goto 285}${top_io io_write 1}
+${color0}${top_io name 2}${color1}${goto 170}${top_io pid 2}${goto 225}${top_io io_read 2}${goto 285}${top_io io_write 2}
+${color0}${top_io name 3}${color1}${goto 170}${top_io pid 3}${goto 225}${top_io io_read 3}${goto 285}${top_io io_write 3}
+${color0}${top_io name 4}${color1}${goto 170}${top_io pid 4}${goto 225}${top_io io_read 4}${goto 285}${top_io io_write 4}
+]]
